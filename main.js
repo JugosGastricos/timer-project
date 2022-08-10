@@ -26,12 +26,24 @@ const timer = () => {
             }
         }
         console.log(`Seconds: ${seconds}`);
+        printTimer.innerText = `${hours}:${minutes}:${seconds}`;
     }, 1000);
 }
 
-const stopTimer = () =>{
-    clearInterval(interval)
+const pauseTimer = () => {
+    clearInterval(interval);
+    interval = null;
+}
+
+const stopTimer = () => {
+    clearInterval(interval);
+    interval = null;
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    printTimer.innerText = `${hours}:${minutes}:${seconds}`;
 }
 
 goButton.addEventListener("click", timer);
+pauseButton.addEventListener("click", pauseTimer);
 stopButton.addEventListener("click", stopTimer);
