@@ -1,7 +1,10 @@
 const goButton = document.getElementById("go");
 const pauseButton = document.getElementById("pause");
+const flagButton = document.getElementById("flag");
 const stopButton = document.getElementById("stop");
+
 const printTimer = document.getElementById("timer");
+const printFlag = document.getElementById("printFlag");
 
 
 // stopButton.addEventListener("click")
@@ -9,6 +12,7 @@ const printTimer = document.getElementById("timer");
 let seconds = 0;
 let minutes = 0;
 let hours = 0;
+let count = 0;
 let interval;
 printTimer.innerText = `${hours}:${minutes}:${seconds}`;
 
@@ -41,9 +45,26 @@ const stopTimer = () => {
     seconds = 0;
     minutes = 0;
     hours = 0;
+    count = 0;
     printTimer.innerText = `${hours}:${minutes}:${seconds}`;
+    printFlag.innerText = ``;
+}
+
+const flag = () => {
+    const saveFlag = [];
+    count ++;
+    
+    saveFlag.push({hours, minutes, seconds});
+    saveFlag.forEach((value) => {
+        const newParagraph = document.createElement("p");
+        newParagraph.className = "new-input";
+        printFlag.appendChild(newParagraph);
+        newParagraph.innerText = `🚩${count}: ${value.hours}:${value.minutes}:${value.seconds} \n`;
+        saveFlag.shift();
+    })
 }
 
 goButton.addEventListener("click", timer);
 pauseButton.addEventListener("click", pauseTimer);
+flagButton.addEventListener("click", flag);
 stopButton.addEventListener("click", stopTimer);
