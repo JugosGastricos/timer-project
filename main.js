@@ -15,21 +15,10 @@ let interval;
 printTimer.innerText = `0${minutes}:0${seconds}:0${miliseconds}`;
 
 const cleanLook = (flag,param,tagId) => {
-    tagId.innerText = `${flag}${param} 0${minutes}:0${seconds}:0${miliseconds}`;
-
-    if(miliseconds > 9){
-        tagId.innerText = `${flag}${param} 0${minutes}:0${seconds}:${miliseconds}`;
-    }
-    if (seconds > 9) {
-        tagId.innerText = `${flag}${param} 0${minutes}:${seconds}:${miliseconds}`;
-    }
-    if (minutes > 9) {
-        tagId.innerText = `${flag}${param} ${minutes}:${seconds}:${miliseconds}`;
-    }
     if (hours > 0) {
-        tagId.innerText = `${flag}${param} 0${hours}:${minutes}:${seconds}:${miliseconds}`;
-    } else if (hours > 9) {
-        tagId.innerText = `${flag}${param} ${hours}:${minutes}:${seconds}:${miliseconds}`;
+        tagId.innerText = `${flag}${param} ${hours > 9 ? hours : "0" + hours}:${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
+    } else {
+        tagId.innerText = `${flag}${param} ${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
     }
 }
 
@@ -53,6 +42,7 @@ const timer = () => {
         // console.log(`Seconds: ${seconds}`);
         cleanLook("","",printTimer);
     }, 10);
+    return goButton = pauseButton;
 }
 
 
