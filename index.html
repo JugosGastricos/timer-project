@@ -4,16 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
     <title>Timer</title>
 </head>
 <body>
     <article>
         <p id="timer"></p>
-        <input type="button" value="Go!" id="go" />
-        <input type="button" value="Pause" id="pause" />
-        <input type="button" value="Flag" id="flag" />
-        <input type="button" value="Stop!" id="stop" />
-        <section id="printFlag"></section>
+        <section class="button-section">
+            <input type="button" value="Go!" id="go" class="button" />
+            <input type="button" value="Pause" id="pause" class="button" />
+            <input type="button" value="Flag" id="flag" class="button" />
+            <input type="button" value="Stop!" id="stop" class="button" />
+        </section>
+        <section id="printFlag" class="flag-section"></section>
     </article>
     <script src="./main.js"></script>
 </body>
