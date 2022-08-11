@@ -12,13 +12,22 @@ let minutes = 0;
 let hours = 0;
 let count = 0;
 let interval;
+
+const hideButton = (button) => {
+    button.setAttribute("hidden", true);
+}
+
+const showButton = (button) => {
+    button.removeAttribute("hidden");
+}
+
 printTimer.innerText = `0${minutes}:0${seconds}:0${miliseconds}`;
 
-const cleanLook = (flag,param,tagId) => {
+const cleanLook = (flag,count,tagId) => {
     if (hours > 0) {
-        tagId.innerText = `${flag}${param} ${hours > 9 ? hours : "0" + hours}:${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
+        tagId.innerText = `${flag}${count} ${hours > 9 ? hours : "0" + hours}:${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
     } else {
-        tagId.innerText = `${flag}${param} ${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
+        tagId.innerText = `${flag}${count} ${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
     }
 }
 
@@ -42,13 +51,22 @@ const timer = () => {
         // console.log(`Seconds: ${seconds}`);
         cleanLook("","",printTimer);
     }, 10);
-    return goButton = pauseButton;
+    
+    hideButton(goButton);
+    hideButton(stopButton);
+    showButton(pauseButton);
+    showButton(flagButton);
 }
 
 
 const pauseTimer = () => {
     clearInterval(interval);
     interval = null;
+    
+    hideButton(pauseButton);
+    hideButton(flagButton);
+    showButton(goButton);
+    showButton(stopButton);
 }
 
 const stopTimer = () => {
@@ -61,6 +79,8 @@ const stopTimer = () => {
     count = 0;
     printTimer.innerText = `0${minutes}:0${seconds}:0${miliseconds}`;
     printFlag.innerText = ``;
+    
+    hideButton(stopButton);
 }
 
 const flag = () => {
