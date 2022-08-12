@@ -6,6 +6,7 @@ const stopButton = document.getElementById("stop");
 const printTimer = document.getElementById("timer");
 const printFlag = document.getElementById("printFlag");
 
+//while mili is the total count of miliseconds, only interrumped when the stop button is pressed, miliseconds will reset everytime mili gets to 100. Milisencods will be used to print the data, while mili will be used in the timer and flag logic of the app.
 let mili = 0;
 let miliseconds = 0;
 let seconds = 0;
@@ -25,6 +26,7 @@ const showButton = (button) => {
 
 printTimer.innerText = `0${minutes}:0${seconds}.0${miliseconds}`;
 
+//this function will be used to facilitate showing the timer and part of the flagged times. This mostly helps in managing the zeroes, as they continuosly change whenever values are less than 10.
 const cleanLook = (flag,count,tagId) => {
     if (hours > 0) {
         tagId.innerText = `${flag}${count} ${hours > 9 ? hours : "0" + hours}:${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}.${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
@@ -33,6 +35,7 @@ const cleanLook = (flag,count,tagId) => {
     }
 }
 
+//main logic for the timer
 const timer = () => {
     interval = setInterval(() => {
         mili ++
@@ -43,7 +46,7 @@ const timer = () => {
             if(mili % 6000 === 0){
                 seconds = 0;
                 minutes ++;
-                if (mili % 60000 === 0){
+                if (minutes > 59){
                     minutes = 0;
                     hours ++;
                 }
@@ -84,11 +87,14 @@ const stopTimer = () => {
     hideButton(stopButton);
 }
 
-
+//main logic for the flag option. It's comprised of two parts: The first part which shows the flag number and the time it was flagged; and the second part which shows the difference in time between the new flag and the previous one
 const flag = () => {
     count ++;
+
+    //flagedTimes will save the current time whenever a new flag is created
     flagedTimes.push(mili);
 
+    //newParagraph is where the flagged times will be printed whenever a new flag is created
     const newParagraph = document.createElement("p");
     const newDiv = document.createElement("div");
     newDiv.className = "new-div";
@@ -97,30 +103,34 @@ const flag = () => {
     printFlag.appendChild(newDiv);
     cleanLook('🚩',count + ':',newParagraph);
     
+    //newSpan is where the difference between flagedTimes and timer will be printed whenever a new flag is created
     const newSpan = document.createElement("span");
     newSpan.className = "new-input new-span";
     newDiv.appendChild(newSpan);
     
+    //the logic behind calculating and showing the time difference between a new flag and a previous one. This was the hardest part to make, as there are many subtle changes to account for when calculating and showing flag differences.
     const timeDifference = () => {
         let x;
-        let y;
+        let secondsDifference;
         let z;
-        let add;
+        let minutesDifference;
+        let hoursDifference = 0;
 
-        const substract = mili - flagedTimes[flagedTimes.length - 2];
+        const substract = flagedTimes[flagedTimes.length - 1] - flagedTimes[flagedTimes.length - 2];
         z = Number(Math.floor(substract)/100);
-        
+
         if(flagedTimes.length > 1){
-            newSpan.innerText = `+ 00:${z < 9 ? "0" + z : z}`;
+            newSpan.innerText = `+ 00:${z < 9 ? "0" + z : z}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
         }
 
         if (z > 60) {
             x = Math.floor(z/10)*10;
-            y = (z - x).toFixed(2)
-            add = Math.floor(x / 60);
-            newSpan.innerText = `+ ${add < 9 ? "0" + add : add}:${z}`;
+            secondsDifference = Number((z - x).toFixed(2));
+            minutesDifference = Math.floor(x / 60);
+            minutesDifference > 59 ? hoursDifference += minutesDifference : "";
+            
+            newSpan.innerText = `+ ${hoursDifference > 0 && hoursDifference < 9 ? "0" + hoursDifference : hoursDifference < 9 ? hoursDifference : ""}${minutesDifference < 9 ? "0" + minutesDifference : minutesDifference}:${secondsDifference < 9 ? "0" + secondsDifference : secondsDifference}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
         }
-        
     };
     timeDifference();
 }
