@@ -53,7 +53,7 @@ const timer = () => {
             }
         }
         cleanLook("","",printTimer);
-    }, 10);
+    }, 1);
     
     hideButton(goButton);
     hideButton(stopButton);
@@ -129,7 +129,9 @@ const flag = () => {
             minutesDifference = Math.floor(x / 60);
             minutesDifference > 59 ? hoursDifference += minutesDifference : "";
             
-            newSpan.innerText = `+ ${hoursDifference > 0 && hoursDifference < 9 ? "0" + hoursDifference : hoursDifference < 9 ? hoursDifference : ""}${minutesDifference < 9 ? "0" + minutesDifference : minutesDifference}:${secondsDifference < 9 ? "0" + secondsDifference : secondsDifference}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
+            newSpan.innerText = `+ ${hoursDifference > 0 && hoursDifference < 9 ? "0" + hoursDifference : hoursDifference > 9 ? hoursDifference : ""}${minutesDifference < 9 ? "0" + minutesDifference : minutesDifference}:${secondsDifference < 9 ? "0" + secondsDifference : secondsDifference}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
+            
+            console.log(hoursDifference)
         }
     };
     timeDifference();

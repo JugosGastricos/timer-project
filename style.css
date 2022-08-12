@@ -19,27 +19,27 @@ article {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 }
 
 #timer{
-    font-size: 4.5rem;
+    font-size: 7rem;
 }
 
 .button-section {
-    width: 180px;
+    width: 250px;
     display: flex;
     margin: 15px 0;
     justify-content: space-evenly;
 }
 
 .button {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     background-color: #fffe;
-    border-radius: 22.5px;
+    border-radius: 30px;
     background-repeat: no-repeat;
-    background-size: 22.5px;
+    background-size: 30px;
     background-position: center;
     color: transparent;
 
