@@ -21,13 +21,13 @@ const showButton = (button) => {
     button.removeAttribute("hidden");
 }
 
-printTimer.innerText = `0${minutes}:0${seconds}:0${miliseconds}`;
+printTimer.innerText = `0${minutes}:0${seconds}.0${miliseconds}`;
 
 const cleanLook = (flag,count,tagId) => {
     if (hours > 0) {
-        tagId.innerText = `${flag}${count} ${hours > 9 ? hours : "0" + hours}:${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
+        tagId.innerText = `${flag}${count} ${hours > 9 ? hours : "0" + hours}:${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}.${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
     } else {
-        tagId.innerText = `${flag}${count} ${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}:${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
+        tagId.innerText = `${flag}${count} ${minutes > 9 ? minutes : "0" + minutes}:${seconds > 9 ? seconds : "0" + seconds}.${miliseconds > 9 ? miliseconds : "0" + miliseconds}`;
     }
 }
 
@@ -37,15 +37,15 @@ const timer = () => {
         if(miliseconds === 100){
             miliseconds = 0;
             seconds ++
-        }
-        if(seconds === 60){
-            seconds = 0;
-            minutes ++;
-            // console.log(`Minutes: ${minutes}`);
-            if (minutes === 60){
-                minutes = 0;
-                hours ++;
-                // console.log(`Hours: ${hours}`);
+            if(seconds === 60){
+                seconds = 0;
+                minutes ++;
+                // console.log(`Minutes: ${minutes}`);
+                if (minutes === 60){
+                    minutes = 0;
+                    hours ++;
+                    // console.log(`Hours: ${hours}`);
+                }
             }
         }
         // console.log(`Seconds: ${seconds}`);
@@ -77,7 +77,7 @@ const stopTimer = () => {
     minutes = 0;
     hours = 0;
     count = 0;
-    printTimer.innerText = `0${minutes}:0${seconds}:0${miliseconds}`;
+    printTimer.innerText = `0${minutes}:0${seconds}.0${miliseconds}`;
     printFlag.innerText = ``;
     
     hideButton(stopButton);

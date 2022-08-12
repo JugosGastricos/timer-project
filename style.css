@@ -7,6 +7,8 @@
 html {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 62.5%;
+    background-color: black;
+    color: white;
 }
 
 article {
@@ -25,18 +27,56 @@ article {
 }
 
 .button-section {
-    width: 250px;
+    width: 180px;
     display: flex;
     margin: 15px 0;
     justify-content: space-evenly;
 }
 
 .button {
-    width: 50px;
+    width: 40px;
+    height: 40px;
+    background-color: #fffe;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center;
+    color: transparent;
+
+}
+
+.button:hover {
+    background-color: #fffd;
+}
+
+.button:active {
+    background-color: #fffb;
+}
+
+/* Icons obtained from https://icons8.com/icon/set/media-controls/ios-glyphs */
+#go {
+    background-image: url("./assets/icons8-play-50.png");
+}
+
+#stop {
+    background-image: url("./assets/icons8-stop-50.png");
+}
+
+#pause {
+    background-image: url("./assets/icons8-pause-50.png");
+}
+
+#flag {
+    background-image: url("./assets/icons8-flag-48.png");
 }
 
 .flag-section {
     width: 200px;
     height: 300px;
     overflow: auto;
+}
+
+.new-input {
+    margin: 5px 0;
+    border-top: 1px solid #fff6;
 }
