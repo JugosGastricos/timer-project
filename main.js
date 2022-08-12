@@ -88,7 +88,6 @@ const stopTimer = () => {
 const flag = () => {
     count ++;
     flagedTimes.push(mili);
-    console.log(flagedTimes);
 
     const newParagraph = document.createElement("p");
     const newDiv = document.createElement("div");
@@ -109,21 +108,16 @@ const flag = () => {
         let add;
 
         const substract = mili - flagedTimes[flagedTimes.length - 2];
-
-        console.log(substract)
         z = Number(Math.floor(substract)/100);
         
         if(flagedTimes.length > 1){
-            newSpan.innerText = `+ 00:${z}`;
-            console.log(`00:${z}`)
+            newSpan.innerText = `+ 00:${z < 9 ? "0" + z : z}`;
         }
 
         if (z > 60) {
             x = Math.floor(z/10)*10;
             y = (z - x).toFixed(2)
-            console.log(y,z);
             add = Math.floor(x / 60);
-            console.log(`0${add}:${y}`);
             newSpan.innerText = `+ ${add < 9 ? "0" + add : add}:${z}`;
         }
         
