@@ -100,7 +100,7 @@ const flag = () => {
     newDiv.className = "new-div";
     newParagraph.className = "new-input";
     newDiv.appendChild(newParagraph);
-    printFlag.appendChild(newDiv);
+    printFlag.insertAdjacentElement('afterbegin',newDiv);
     cleanLook('🚩',count + ':',newParagraph);
     
     //newSpan is where the difference between flagedTimes and timer will be printed whenever a new flag is created
@@ -120,7 +120,7 @@ const flag = () => {
         z = Number(Math.floor(substract)/100);
 
         if(flagedTimes.length > 1){
-            newSpan.innerText = `+ 00:${z < 9 ? "0" + z : z}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
+            newSpan.innerText = `+ 00:${z < 10 ? "0" + z : z}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
         }
 
         if (z > 60) {
@@ -129,7 +129,7 @@ const flag = () => {
             minutesDifference = Math.floor(x / 60);
             minutesDifference > 59 ? hoursDifference += minutesDifference : "";
             
-            newSpan.innerText = `+ ${hoursDifference > 0 && hoursDifference < 9 ? "0" + hoursDifference : hoursDifference > 9 ? hoursDifference : ""}${minutesDifference < 9 ? "0" + minutesDifference : minutesDifference}:${secondsDifference < 9 ? "0" + secondsDifference : secondsDifference}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
+            newSpan.innerText = `+ ${hoursDifference > 0 && hoursDifference < 10 ? "0" + hoursDifference : hoursDifference > 9 ? hoursDifference : ""}${minutesDifference < 10 ? "0" + minutesDifference : minutesDifference}:${secondsDifference < 10 ? "0" + secondsDifference : secondsDifference}${Number.isInteger(z) ? ".0" : ""}${substract % 10 ? "" : "0"}`;
             
             console.log(hoursDifference)
         }
